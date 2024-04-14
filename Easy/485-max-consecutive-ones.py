@@ -9,6 +9,4 @@ class Solution:
             else:
                 maxVal = max(maxVal, cur)
                 cur = 0
-        maxVal = max(maxVal, cur)
-
-        return maxVal
+        return max(maxVal, cur)
