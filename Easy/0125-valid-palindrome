@@ -1,0 +1,12 @@
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        # O(n) solution
+
+        alphanumeric = set('abcdefghijklmnopqrstuvwxyz1234567890')
+        
+        cleaned_s = ''
+        for c in s:
+            if c.lower() in alphanumeric:
+                cleaned_s += c.lower()
+        
+        return cleaned_s == cleaned_s[::-1]
