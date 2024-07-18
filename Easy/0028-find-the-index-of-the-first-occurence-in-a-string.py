@@ -1,6 +1,6 @@
 class Solution:
     def strStr(self, haystack: str, needle: str) -> int:
-        # O((N − M) * M) solution
+        # O((n − m) * m) solution
         h, n = len(haystack), len(needle)
 
         for i in range(h - n + 1):
