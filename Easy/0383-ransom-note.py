@@ -1,15 +1,18 @@
 class Solution:
     def canConstruct(self, ransomNote: str, magazine: str) -> bool:
-        # O(n + m) solution
+        # O(m + n) solution
 
-        counter = {}
-        for char in ransomNote:
-            counter[char] = 1 + counter.get(char, 0)
+        freq = {}
+
+        # Getting the frequency of characters in magazine
+        for c in magazine:
+            freq[c] = 1 + freq.get(c, 0)
         
-        for char in magazine:
-            if char in counter:
-                counter[char] -= 1
-                if counter[char] == 0:
-                    del counter[char]
+        # Check if each character in ransomNote can be constructed
+        for c in ransomNote:
+            if freq.get(c, 0) > 0:
+                freq[c] -= 1
+            else:
+                return False
         
-        return not counter
+        return True

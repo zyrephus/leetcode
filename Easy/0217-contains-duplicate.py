@@ -1,5 +1,7 @@
 class Solution:
     def containsDuplicate(self, nums: List[int]) -> bool:
+        # O(n) solution
+
         number_map = {}
         for num in nums:
             if num in number_map:
