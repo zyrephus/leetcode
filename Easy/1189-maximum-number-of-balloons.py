@@ -1,20 +1,25 @@
-# Optimized solution:
 class Solution:
     def maxNumberOfBalloons(self, text: str) -> int:
         # O(n) solution
 
-        counter = defaultdict(int)
-        balloon = 'balloon'
+        balloon = {
+            "b": 0,
+            "a": 0,
+            "l": 0,
+            "o": 0,
+            "n": 0
+        }
 
+        # Getting the count of all the letters in balloon in text
         for c in text:
             if c in balloon:
-                counter[c] += 1
+                balloon[c] += 1
         
-        # Checks if any characters in balloon aren't in counter
-        if any(c not in counter for c in balloon):
-            return 0
-        else:
-            return min(counter['b'], counter['a'], counter['l'] // 2, counter['o'] // 2, counter['n'])
+        # Finding how many instances of balloon there is
+        balloon["l"] //= 2
+        balloon["o"] //= 2
+        
+        return min(balloon["b"], balloon["a"], balloon["l"], balloon["o"], balloon["n"])
 
 # First solution:
 # class Solution:
