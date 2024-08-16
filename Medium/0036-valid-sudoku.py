@@ -1,39 +1,37 @@
 class Solution:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
-        # O(1) (since the board is constant) solution
+        # O(1) solution
 
-        # Validate rows
+        # Rows
         for i in range(9):
-            s = set()
+            row_set = set()
             for j in range(9):
-                item = board[i][j]
-                if item in s:
+                n = board[i][j]
+                if n in row_set:
                     return False
-                elif item != '.':
-                    s.add(item)
+                elif n != ".":
+                    row_set.add(n)
 
-        # Validate columns
+        # Columns
         for i in range(9):
-            s = set()
+            col_set = set()
             for j in range(9):
-                item = board[j][i]
-                if item in s:
+                n = board[j][i]
+                if n in col_set:
                     return False
-                elif item != '.':
-                    s.add(item)
+                elif n != ".":
+                    col_set.add(n)
 
-        # Validate boxes
-        starts = [(0, 0), (0, 3), (0, 6),
-                (3, 0), (3, 3), (3, 6),
-                (6, 0), (6, 3), (6, 6)]
-        for i, j in starts:
-            s = set()
-            for row in range(i, i + 3):
-                for col in range(j, j + 3):
-                    item = board[row][col]
-                    if item in s:
-                        return False
-                    elif item != '.':
-                        s.add(item)
+        # Sub-boxes
+        for i in range(0, 9, 3):
+            for j in range(0, 9, 3):
+                sub_set = set()
+                for k in range(3):
+                    for l in range(3):
+                        n = board[i + k][j + l]
+                        if n in sub_set:
+                            return False
+                        elif n != ".":
+                            sub_set.add(n)
         
         return True
