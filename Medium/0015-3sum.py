@@ -1,7 +1,7 @@
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
         # O(n^2) solution
-
+ 
         res = []
         n = len(nums)
 
