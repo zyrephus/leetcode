@@ -1,15 +1,16 @@
 class Solution:
     def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
-        # O(n) solution
+        # O(n) soltuion
 
         res = [0] * len(temperatures)
         stack = []
-        for i, temp in enumerate(temperatures):
-            # Keep popping off the stack until we find a lesser temperature
-            while stack and stack[-1][0] < temp:
-                stack_t, stack_i = stack.pop() # Tuple unpacking
+
+        for i, temperature in enumerate(temperatures):
+            # Keep popping off stack until we arrive at a temperature (in the stack) > current temperature
+            while stack and temperature > stack[-1][0]:
+                stack_t, stack_i = stack.pop()
                 res[stack_i] = i - stack_i
 
-            stack.append((temp, i))
-
+            stack.append((temperature, i))
+        
         return res
