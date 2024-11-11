@@ -2,17 +2,16 @@ class Solution:
     def searchInsert(self, nums: List[int], target: int) -> int:
         # O(log n) solution
 
-        left, right = 0, len(nums) - 1
+        low, mid, high = 0, 0, len(nums) - 1
 
-         # Binary search
-        while left <= right:
-            m = (left + right) // 2 # Integer division by two
-            if target < nums[m]:
-                right = m - 1
-            elif target > nums[m]:
-                left = m + 1
+        while low <= high:
+            mid = (low + high) // 2 # Integer division
+
+            if nums[mid] < target:
+                low = mid + 1
+            elif nums[mid] > target:
+                high = mid - 1
             else:
-                return m
+                return mid
         
-        return left
-            
+        return low
