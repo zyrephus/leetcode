@@ -1,35 +1,33 @@
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        # O(n) solution
+        len_s, len_t = len(s), len(t)
 
-        if len(s) != len(t):
+        if len_s != len_t:
             return False
+        
+        count = [0] * 26
 
-        freq_s = {}
-        for c in s:
-            freq_s[c] = 1 + freq_s.get(c, 0)
+        for i in range(len_s):
+            count[ord(s[i]) - ord('a')] += 1
+            count[ord(t[i]) - ord('a')] -= 1
         
-        freq_t = {}
-        for c in t:
-            freq_t[c] = 1 + freq_t.get(c, 0)
-        
-        return freq_t == freq_s
+        for c in count:
+            if c != 0:
+                return False
+        return True
     
         # Another approach
-        # if len(s) != len(t):
-        #     return False
-        # s_map = {}
-        # t_map = {}
-        # for i in range(len(s)):
-        #     if s[i] in s_map:
-        #         s_map[s[i]] += 1
-        #     elif s[i] not in s_map:
-        #         s_map[s[i]] = 1
-        #     if t[i] in t_map:
-        #         t_map[t[i]] += 1
-        #     elif t[i] not in t_map:
-        #         t_map[t[i]] = 1
-        # for char in s_map:
-        #     if s_map[char] != t_map.get(char, 0):
-        #         return False
-        # return True
+        # len_s, len_t = len(s), len(t)
+
+        #  if len_s != len_t:
+        #      return False
+        
+        #  s_freq = {}
+        #  t_freq = {}
+
+        #  for i in range(len_s):
+        #      s_freq[s[i]] = 1 + s_freq.get(s[i], 0)
+        #      t_freq[t[i]] = 1 + t_freq.get(t[i], 0)
+        
+        #  return s_freq == t_freq
+        
