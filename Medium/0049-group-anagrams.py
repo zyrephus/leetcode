@@ -1,9 +1,13 @@
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        res = defaultdict(list)
+        groups = defaultdict(list) # frequency -> list of strings
+
         for s in strs:
-            count = [0] * 26
+            # Get frequency
+            freq = [0] * 26
             for c in s:
-                count[ord(c) - ord("a")] += 1
-            res[tuple(count)].append(s)
-        return res.values()
+                freq[ord(c) - ord("a")] += 1
+
+            groups[tuple(freq)].append(s)
+
+        return list(groups.values())
