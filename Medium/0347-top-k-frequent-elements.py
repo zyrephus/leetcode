@@ -1,24 +1,18 @@
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        # O(n) solution
+        freq = {}
+
+        for num in nums:
+            freq[num] = 1 + freq.get(num, 0)
         
-        nums_map = {} # Frequency of numbers
+        bucket = [[] for i in range(len(nums) + 1)]
+        for num, frequency in freq.items():
+            bucket[frequency].append(num)
         
-        freq = [[] for i in range(len(nums) + 1)] # Bucket sort
-
-        # Counting frequency
-        for i in nums:
-            nums_map[i] = 1 + nums_map.get(i, 0)
-
-        # Grouping numbers by their frequency
-        for num, count in nums_map.items():
-            freq[count].append(num)
-
-        # Traverse frequency list from high to low
         res = []
-        for i in range(len(freq) - 1, 0, -1):
-            for num in freq[i]:
+        for i in range(len(bucket) - 1, 0, -1):
+            for num in bucket[i]:
                 res.append(num)
-                
-                if len(res) == k:
+
+                if len(res) == k: 
                     return res
