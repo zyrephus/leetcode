@@ -1,20 +1,17 @@
 class Solution:
     def isValid(self, s: str) -> bool:
-        # O(n) solution
+        stack = []
 
-        dic = {
+        p_hash = {
             ")": "(",
-            "}": "{",
             "]": "[",
+            "}": "{"
         }
-        res = []
-
-        for i in range(len(s)):
-            if s[i] in "([{":
-                res.append(s[i])
+    
+        for p in s:
+            if p in p_hash and stack and p_hash[p] == stack[-1]:
+                stack.pop()
             else:
-                if not res or res[-1] != dic[s[i]]:
-                    return False
-                res.pop()
+                stack.append(p)
 
-        return not res
+        return not bool(stack)
