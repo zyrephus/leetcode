@@ -1,16 +1,13 @@
 class Solution:
     def twoSum(self, numbers: List[int], target: int) -> List[int]:
-        # O(n) solution
+        l, r = 0, len(numbers) - 1
 
-        left, right = 0, len(numbers) - 1
+        while l < r: 
+            curr = numbers[l] + numbers[r]
 
-        while left <= right:
-            summ = numbers[left] + numbers[right]
-
-            if summ < target:
-                left += 1
-            elif summ > target:
-                right -= 1
+            if curr > target: 
+                r -= 1
+            elif curr < target:
+                l += 1
             else:
-                return [left + 1, right + 1]
-        
+                return [l + 1, r + 1]
