@@ -1,22 +1,18 @@
 class Solution:
     def trap(self, height: List[int]) -> int:
-        # O(n) solution
+        l, r = 0, len(height) - 1
+        l_max, r_max = height[l], height[r]
 
-        left = right = 0
-        n = len(height)
-        max_left = [0] * n
-        max_right = [0] * n
-
-        for i in range(n):
-            j = -i - 1
-            max_left[i] = left
-            max_right[j] = right
-            left = max(left, height[i])
-            right = max(right, height[j])
-        
         res = 0
-        for i in range(n):
-            potential_water = min(max_left[i], max_right[i])
-            res += max(0, potential_water - height[i])
-        
+
+        while l < r:
+            if l_max < r_max:
+                l += 1
+                l_max = max(l_max, height[l])
+                res += l_max - height[l] # Never going to be < 0
+            else:
+                r -= 1
+                r_max = max(r_max, height[r])
+                res += r_max - height[r] # Never going to be < 0
+            
         return res
