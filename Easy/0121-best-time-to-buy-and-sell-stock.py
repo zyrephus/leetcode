@@ -1,29 +1,15 @@
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        # O(n) solution
+        l, r = 0, 1
 
-        if not prices:
-            return 0
-        
-        left, right, profit = 0, 1, 0
-        while right < len(prices):
-            if prices[left] < prices[right]:
-                profit = max(profit, prices[right] - prices[left])
+        res = 0
+
+        while r < len(prices):
+            if prices[l] < prices[r]:
+                res = max(res, prices[r] - prices[l])
             else:
-                left = right
-            right += 1
-        return profit
-        
-        # First approach
+                l = r
+                
+            r += 1
 
-        # profit = 0
-        # left, right = 0, 1
-
-        # while right < len(prices):
-        #     if prices[right] - prices[left] < 0:
-        #         left = right
-        #     else:
-        #         profit = max(profit, prices[right] - prices[left])
-        #     right += 1
-        
-        # return profit
+        return res
