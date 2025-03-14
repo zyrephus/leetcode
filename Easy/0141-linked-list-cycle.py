@@ -1,22 +1,19 @@
 # Definition for singly-linked list.
 # class ListNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
 
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
-        # O(n) solution
-        
-        tortoise = head
-        hare = head
+        slow, fast = head, head
 
-        # If there is no cycle, the hare will reach the end of the list
-        while hare and hare.next: 
-            tortoise = tortoise.next
-            hare = hare.next.next
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
 
-            if tortoise == hare:
+            if slow == fast:
                 return True
 
         return False
+        
