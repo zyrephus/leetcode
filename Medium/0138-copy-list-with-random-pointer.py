@@ -9,28 +9,20 @@ class Node:
 
 class Solution:
     def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
-        # O(n) solution
-
         if not head:
             return None
-        
-        node_map = {}
 
-        # First pass: create copies of each node without next and random pointers
+        dic = {} # Old: copy 
+
         curr = head
         while curr:
-            node_map[curr] = Node(curr.val)
-            curr = curr.next
-        
-        # Second pass: assign next and random pointers using node_map
-        curr = head
-        while curr:
-            if curr.next: 
-                # Set next of copied node to copy of curr.next
-                node_map[curr].next = node_map[curr.next]
-            if curr.random:
-                # Set random of copied node to copy of curr.random
-                node_map[curr].random = node_map[curr.random]
+            dic[curr] = Node(curr.val)
             curr = curr.next
 
-        return node_map[head]
+        curr = head
+        while curr:
+            dic[curr].next = dic.get(curr.next)
+            dic[curr].random = dic.get(curr.random)
+            curr = curr.next
+        
+        return dic[head]
