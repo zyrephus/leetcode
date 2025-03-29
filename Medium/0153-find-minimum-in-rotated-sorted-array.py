@@ -1,7 +1,5 @@
 class Solution:
     def findMin(self, nums: List[int]) -> int:
-        # O(log n) solution
-
         left, right = 0, len(nums) - 1
 
         while left < right:
@@ -9,8 +7,7 @@ class Solution:
 
             if nums[mid] > nums[right]:
                 left = mid + 1
-            else: 
-                right = mid # Minimum could be nums[mid]
+            else: # mid <= right
+                right = mid
         
-        # left == right
-        return nums[left]
+        return nums[left] # Or nums[right]
