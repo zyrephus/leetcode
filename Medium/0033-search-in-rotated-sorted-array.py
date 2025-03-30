@@ -1,22 +1,21 @@
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
-        # O(log n) solution
-
         # Find minimum in array
         left, right = 0, len(nums) - 1
 
         while left < right:
-            m = (left + right) // 2
+            mid = (left + right) // 2
 
-            if nums[m] > nums[right]:
-                left = m + 1
+            if nums[mid] > nums[right]:
+                left = mid + 1
             else:
-                right = m # nums[right] could still be
+                right = mid
         
-        min_pos = left # Position of minimum number
-
+        min_pos = left
+        
+        # Determine which half to search
         if target < nums[0]:
-            left = min_pos # Redundant
+            # left = min_pos
             right = len(nums) - 1
         elif target > nums[0]:
             left = 0
@@ -24,14 +23,15 @@ class Solution:
         else:
             return 0
 
+        # Find target
         while left <= right:
-            m = (left + right) // 2
+            mid = (left + right) // 2
 
-            if nums[m] > target:
-                right = m - 1
-            elif nums[m] < target:
-                left = m + 1
+            if nums[mid] > target:
+                right = mid - 1
+            elif nums[mid] < target:
+                left = mid + 1
             else:
-                return m
-
+                return mid
+        
         return -1
