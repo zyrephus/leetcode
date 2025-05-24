@@ -1,17 +1,14 @@
 class Solution:
     def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
-        # O(n + m) solution
-
-        # Count occurrences of each element in nums1
-        counter = {}
-        for n in nums1:
-            counter[n] = 1 + counter.get(n, 0)
+        hash_1 = {}
+        for num in nums1:
+            hash_1[num] = 1 + hash_1.get(num, 0)
         
         res = []
-        # Finding common elements in nums2
-        for n in nums2:
-            if n in counter and counter[n] != 0:
-                counter[n] -= 1
-                res.append(n)
-        
+        for num in nums2:
+            if num in hash_1 and hash_1[num] > 0:
+                res.append(num)
+                hash_1[num] -= 1
+
         return res
+        
