@@ -5,7 +5,7 @@ class Solution:
         dp = [False] * (n + 1)
         dp[n] = True
 
-        for i in range(s - 1, -1, -1):
+        for i in range(n - 1, -1, -1):
             for w in wordDict:
                 lenW = len(w)
                 if (i + lenW) <= n and s[i : i + lenW] == w:
